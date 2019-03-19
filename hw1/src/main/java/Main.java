@@ -28,7 +28,13 @@ public class Main {
         for(QueryData data:searchResult)
             System.out.println(data.toString());
 
-        Map<String,String> outputMap=new HashMap<>() ;
+        Map<String, Term> map=new HashMap<>() ;
+//        for(QueryData data:searchResult){
+//            String key=data.getToken();
+//            if(!map.containsKey(key))
+//                map.put(data.getToken(),new Term(QueryData));
+//        }
+
 
     }
 

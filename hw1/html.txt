@@ -1,0 +1,473 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+joejoer
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Generator" content="Microsoft Word 97">
+<title>Cataloguing : General Guidelines : Standards/Levels of Cataloguing</title>
+<link rel="stylesheet" type="text/css" href="http://130.15.161.74/techserv/cat/catnew.css" title="catnew">
+<base href="http://130.15.161.74/techserv/">
+</head>
+
+<body>
+
+<p><img src="http://library.queensu.ca/techserv/images/queens.jpg" alt="Queen's Logo">
+
+<h1><a name="Top">Standards/Levels of Cataloguing</a></h1>
+
+<p class="jump">[<img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* ">&nbsp;<a href="./cat/Sect01/c01d.html#Brief">Brief Records</a>&nbsp;|&nbsp;<img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* ">&nbsp;<a href="./cat/Sect01/c01d.html#Intermediate">Intermediate Records</a>&nbsp;|&nbsp;<img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* ">&nbsp;<a href="./cat/Sect01/c01d.html#Full">Full Records</a>&nbsp;|&nbsp;<img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* ">&nbsp;<a href="./cat/Sect01/c01d.html#Information">Information Records</a>&nbsp;|&nbsp;<img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* ">&nbsp;<a href="./cat/Sect01/c01d.html#Authorities">Authorities</a>&nbsp;|&nbsp;<img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* ">&nbsp;<a href="./cat/c001c01.html">Table of Contents (General Guidelines)</a>&nbsp;|&nbsp;<img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* ">&nbsp;<a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<h2><a name="Brief">Brief Records (usually provisional)</a></h2>
+
+<p><b>Applied to:</b></p>
+
+<ul>
+<li>Cataloguing backlog: INVs, PREs, current receipts in process for which cataloguing copy has not been found<br>
+(Please note that the PREs have been almost completely processed)</li>
+<li>Newspapers</li>
+<li>Some Special collections<a href="./cat/Sect01/c01d.html#Special">**</a></li>
+</ul>
+
+<p><b>Content:</b></p>
+<ol>
+<li>Brief bibliographical information: author(s), title, imprint, series, no subjects</li>
+<li>Shelf no. or receipt date access, location/holdings information.</li>
+</ol>
+
+<p class="jump">[<a href="./cat/Sect01/c01d.html#Top">Top</a>&nbsp;|&nbsp;<a href="./cat/c001c01.html">Table of Contents (General Guidelines)</a>&nbsp;|&nbsp;<a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<h2><a name="Intermediate">Intermediate Level Records (permanent designation)</a></h2>
+
+<p><b>Applied to items for which complete cataloguing copy was not found, which belong to one of the following categories:</b></p>
+
+<ul>
+<li>all <b>Gift</b> and <b>Shastri</b> fund items for locations other than Special Collections</li>
+<li>books in the following class nos. (if not Special Collections):</li>
+</ul>
+
+<p class="record">
+L<br>
+M (scores only)<br>
+P<br>
+Q<br>
+R<br>
+S<br>
+T<br>
+Z</p>
+
+<ul>
+<li>all <b>SL Reference</b> books (unless A/C for location requiring full cataloguing)</li>
+<li><b>Education</b> Library items (unless A/C for location requiring full cataloguing)</li>
+<li>some <b>Special Collections</b><a href="./cat/Sect01/c01d.html#Special">**</a></li>
+</ul>
+
+<p><b>Content:</b></p>
+
+<ol>
+<li><b>245:</b> No AUTHOR STATEMENT, if form of the author is same as 1XX and there are no joint authors.</li>
+<li><b>300:</b> omit pre-paging, pages/leaves of plates; only use: ill., col. ill. or maps; omit size, unless unusual (over 30 cm. or very small)</li>
+<li><b>5XX:</b> limit notes (judgement call)</li>
+<li><b>504:</b> omit <b>bibliography</b> note, unless a substantial part of publication</li>
+<li><b>590:</b> do <i>not</i> omit notes re: provenance, gifts.</li>
+<li><b>6XX and 7XX:</b> limit no. (judgment)</li>
+</ol>
+
+<p class="jump">[<a href="./cat/Sect01/c01d.html#Top">Top</a>&nbsp;|&nbsp;<a href="./cat/c001c01.html">Table of Contents (General Guidelines)</a>&nbsp;|&nbsp;<a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<h2><a name="Full">Full</a> Records (permanent designation)</h2>
+
+<p><b>Applied to:</b></p>
+<ul>
+<li>most Special Collections, especially the <b>dated</b> collection<a href="./cat/Sect01/c01d.html#Special">**</a></li>
+<li>books in classes</li>
+</ul>
+
+<p class="record">
+A - K<br>
+N<br>
+U<br>
+V
+</p>
+
+<ul>
+<li>all <b>non-book</b> formats (unless designated as Brief or Information level)</li>
+</ul>
+
+<p><b>Content:</b></p>
+
+<ol>
+<li><b>Full bibliographical description:</b></li>
+<li><b>300:</b> detailed collation, illustration statement, size</li>
+<li><b>5XX:</b> detailed notes re the edition, as appropriate</li>
+<li><b>590:</b> "copy specific" information re binding, provenance, etc.</li>
+<li><b>6XX/7XX:</b> Subjects and name/title added entries, as required</li>
+</ol>
+
+<p class="jump">[<a href="./cat/Sect01/c01d.html#Top">Top</a>&nbsp;|&nbsp;<a href="./cat/c001c01.html">Table of Contents (General Guidelines)</a>&nbsp;|&nbsp;<a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<h2><a name="Information">Information records (usually permanent, may be provisional)</a></h2>
+
+<p><b>Applied to:</b>
+<br>
+Collections of similar items currently assigned a low-priority for cataloguing as separates, e.g. Sheet music in Special Collections; Research reports or CSA publications Douglas Library</p>
+
+<p><b>Content:</b></p>
+
+<ol>
+<li>Bibliographical description of the collection.; 5XX: notes on contents of collection, arrangement, indexing tools, etc.</li>
+<li>Subject access -- collective subject headings-- class no. (without author no./cutter)</li>
+<li>Location, public note (if required)</li>
+<li>One item record per collection</li>
+</ol>
+
+<p>See also the section on: <a href="./cat/Sect11/c11i5.html">Information Records</a>.</p>
+
+<p class="jump">[<a href="./cat/Sect01/c01d.html#Top">Top</a>&nbsp;|&nbsp;<a href="./cat/c001c01.html">Table of Contents (General Guidelines)</a>&nbsp;|&nbsp;<a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<h2><a name="Authorities">Authorities:</a></h2>
+
+<p><b>Names</b>, with no references or notes:</p>
+
+<ul>
+<li>check the headings in the catalogue</li>
+<li>if not found, do NOT make a local authority record -- wait for the national agencies to establish it.</li>
+</ul>
+
+<p><b>Series</b>
+<br>
+Make authority records for <i>all</i> series as each record requires information about how we treat the series at Queen's.</p>
+
+<p><b>Subject and Name Added entries</b>:</p>
+
+<ul>
+<li>when adding access points, use judgement, considering the needs of the users, amount of authority work required, and the keyword/Boolean indexing of the record.</li>
+</ul>
+
+<p>See also: <a href="./cat/Sect03/c03a9.html">Subject Authorities and Headings Revision</a>; and: <a href="./cat/Sect02a/c02cs7.html">Streamlining Authorities</a>.</p>
+
+<p><b>Cataloguer's judgment:</b></p>
+
+<ul>
+<li>The above guidelines may be overridden on a case-by-case basis. If in doubt, consult others, but do not spend excessive time determining the cataloguing level. Err on the side of fullness.</li>
+</ul>
+
+<p>As we are currently behind in loading the LC name authorities, if you need to resolve a problem, you may also search the <a href="http://authorities.loc.gov/">LC Authorities on the web</a>. It is possible to download a single record to load into the database. Please use this option sparingly, as we are working on bringing the records up-to-date in our catalogue. For more information, see <a href="http://130.15.161.74/techserv/cat/Sect02a/lcauth.html">Saving LC Authority records on the Web</a>.</p>
+
+<p><a name="Special">** A detailed listing of Special Collections cataloguing priorities will be compiled separately.</a></p>
+
+<p class="jump">[<a href="./cat/Sect01/c01d.html#Top">Top</a>&nbsp;|&nbsp;<a href="./cat/c001c01.html">Table of Contents (General Guidelines)</a>&nbsp;|&nbsp;<a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<p>Section 1, Subsection D
+<br>
+created Sept. 23, 1992, by V. Taylor<br>
+Included in new index.</p>
+
+<p class="end">Page maintained by Elizabeth A. Read, readel@queensu.ca. Created: 11/10/95 Updated: <!-- datestamp:begin -->30-Sep-2003 04:58 PM<!-- datestamp:end --></p>
+
+</body>
+</html>
+
+
+WARC/0.18
+WARC-Type: response
+WARC-Target-URI: http://130.15.161.74/techserv/cat/Sect02/c02a2.html
+WARC-Warcinfo-ID: 5fdd2301-6cec-40e9-919e-dcae10067161
+WARC-Date: 2009-03-65T09:49:46-0800
+WARC-Record-ID: <urn:uuid:7315d54a-c15c-4e43-b8df-95c4ae680cae>
+WARC-TREC-ID: clueweb09-en0000-09-00242
+Content-Type: application/http;msgtype=response
+WARC-Identified-Payload-Type:
+Content-Length: 13279
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+Date: Fri, 09 Jan 2009 22:04:16 GMT
+Server: Apache
+Connection: close
+Content-Length: 13145
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 4.01//EN">
+
+<html>
+<head>
+<base href="http://130.15.161.74/techserv/full.html">
+<link rel="stylesheet" type="text/css" href="http://130.15.161.74/techserv/cat/catnew.css" title="catnew">
+<title>Cataloguing : Descriptive : AACR2 for Monographs</title>
+</head>
+
+<body>
+
+<p><img src="http://library.queensu.ca/techserv/images/queens.jpg" alt="Queen's Logo">
+
+<h1><a name="top">AACR2 : Descriptive Cataloguing for Monographs</a></h1>
+
+<p class="jump">[<img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* "> &nbsp; <a href="./cat/Sect02/c02a2.html#introduction">Introduction</a> &nbsp;|&nbsp; <img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* "> &nbsp; <a href="./cat/Sect02/c02a2.html#chapters 1-2">Description &mdash; Chapters 1-2</a> &nbsp;|&nbsp; <img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* "> &nbsp; <a href="./cat/Sect02/c02a2.html#title">Tag 245 &mdash; Title of work</a> &nbsp;|&nbsp; <img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* "> &nbsp; <a href="./cat/Sect02/c02a2.html#by statement">Statement of Responsibility</a> &nbsp;|&nbsp; <img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* "> &nbsp; <a href="./cat/Sect02/c02a2.html#edition">Tag 250 &mdash; Edition Statement</a> &nbsp;|&nbsp; <img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* "> &nbsp; <a href="./cat/Sect02/c02a2.html#imprint">Tag 260 &mdash; Imprint</a> &nbsp;|&nbsp; <img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* "> &nbsp; <a href="./cat/Sect02/c02a2.html#physical description">Tag 300 &mdash; Physical Description</a> &nbsp;|&nbsp; <img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* "> &nbsp; <a href="./cat/Sect02/c02a2.html#series">Series</a> &nbsp;|&nbsp; <img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* "> &nbsp; <a href="./cat/Sect02/c02a2.html#notes">Notes</a> &nbsp;|&nbsp; <img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* "> &nbsp; <a href="./cat/c001c02.html">Table of Contents (Descriptive Cataloguing)</a> &nbsp;|&nbsp; <img align="bottom" src="./tri-butt.gif" width=10 height=10 alt="* "> &nbsp; <a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<h2><a name="introduction">Introduction</a></h2>
+
+<p>The purpose of this file is to be a very brief summary of key points from <cite>AACR2</cite>. I am covering monographs only at this time.</p>
+
+<p>Refer also to the memo: <a href="./cat/Sect01/c01d.html">Standards, levels of cataloguing</a> and <a href="./cat/Sect02a/c02a2.html">AACR2 : Access Points</a>. If required refer to the memo: Old rules: Pre-AACR2 cataloguing.</p>
+
+<p>A lot of judgement is required; the rules do not cover all cases. I am supplying rule numbers for further consultation if necessary.</p>
+
+<p class="jump">[<a href="./cat/Sect02/c02a2.html#top">Top</a> &nbsp;|&nbsp; <a href="./cat/c001c02.html">Table of Contents (Descriptive Cataloguing)</a> &nbsp;|&nbsp; <a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<h2><a name="chapters 1-2">Description &mdash; Chapters 1 and 2</a></h2>
+
+<p>Examples are being given for monographs only. Description, in this file, is in full.</p>
+
+<p>Chief source of information &mdash; title page or substitute for it.</p>
+
+<p>Example:</p>
+
+<p class="example">500    |a Cover title.</p>
+
+<p>This example shows that the cover is the chief source of information. Usually you prefer the information found on the chief source of information. AACR2 specifies that if the information is not found in the chief source, put in square brackets.</p>
+
+<p class="jump">[<a href="./cat/Sect02/c02a2.html#top">Top</a> &nbsp;|&nbsp; <a href="./cat/c001c02.html">Table of Contents (Descriptive Cataloguing)</a> &nbsp;|&nbsp; <a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<h2><a name="title">Tag 245 &mdash; Title of the Work</a></h2>
+
+<p>"Transcribe the title proper exactly as to wording, order, and spelling, but not necessarily as to punctuation and capitalization."&mdash;1.1B1.</p>
+
+<p>"If the title proper is not taken from the chief source of information, give the source of the title in a note."&mdash; 1.1B1.</p>
+
+<p>For example:</p>
+<p class="example">500   |a Cover title.</p>
+
+<h3>Parallel titles</h3>
+
+<p>Parallel titles are titles in other languages</p>
+
+<p>"Transcribe parallel titles in the order indicated by their sequence on, or by the layout of, the chief source of information."&mdash;1.1D1.</p>
+
+<p>For example:</p>
+
+<p class="example">245  10  |a Wood Cree = |b Les Cris des for&ecirc;ts</p>
+
+<h3>Other title</h3>
+
+<p>In the following example, "The man who made his name" is the other title&mdash;1.1E1</p>
+
+<p class="example">245  10  |a Edgar Wallace : |b the man who made his name</p>
+
+<p>"If the other title information is lengthy, either give it in a note (see 1.7B5) or abridge it."&mdash;1.1E3</p>
+
+<h3><a name="by statement">Statement of Responsibility &mdash; 1.1F</a></h3>
+
+<p class="example">245  10  |a Title / |c Statement of responsibility.</p>
+
+<p>"Transcribe statements of responsibility appearing prominently in the item in the form in which they appear there."&mdash;1.1F1.</p>
+
+<p>Examples:</p>
+
+<p class="example">    / |c edited by John Smith ; illustrated by John Jones.</p>
+
+<p class="example">/ |c by J. Adams.</p>
+
+<p class="example">/ |c Peter Jameson.</p>
+
+<p class="example">/ |c Sam Awk and Hans Stenholm.</p>
+
+<p class="example">/ |c edited by George King, Ann Arsenault.</p>
+
+<p class="example">/ |c edited by George Wilson and Adam Snow.</p>
+
+<p class="example">/ |c par Pierre Bruneau.</p>
+
+<p class="example">/ |c [edited by] John Dickenson.</p>
+
+<p class="explan">(Title page showed John Dickenson only, but he is only an editor.  Square brackets because we added the information.)</p>
+
+<p class="example">/ |c by J. Williamson ... [et al.]. </p>
+
+<p class="explan">(used when there are more than 3 authors)</p>
+
+<p class="jump">[<a href="./cat/Sect02/c02a2.html#top">Top</a> &nbsp;|&nbsp; <a href="./cat/c001c02.html">Table of Contents (Descriptive Cataloguing)</a> &nbsp;|&nbsp; <a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<h2><a name="edition">Tag 250 &mdash; Edition Statement</a></h2>
+
+<p>"Transcribe the edition statement as found on the item. Use abbreviations as instructed in appendix B and numerals as instructed in appendix C."&mdash;1.2B1.</p>
+
+<p>Examples:</p>
+
+<p class="example">250    |a 2nd ed.</p>
+
+<p class="example">250    |a 4. ed.
+<p class="explan">(foreign edition statement done this way)</p>
+
+<p class="example">250    |a 2nd ed., partly rev.</p>
+
+<p class="example">250    |a 6. Aufl.</p>
+
+<p class="jump">[<a href="./cat/Sect02/c02a2.html#top">Top</a> &nbsp;|&nbsp; <a href="./cat/c001c02.html">Table of Contents (Descriptive Cataloguing)</a> &nbsp;|&nbsp; <a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<h2><a name="imprint">Tag 260 &mdash; Imprint : Publication, distribution</a></h2>
+
+<p>The Imprint statement includes Place, Publisher, and Date</p>
+
+<p>Abbreviate Department to Dept.</p>
+
+<p>Examples:</p>
+
+<p class="example">260    |a London : |b Macmillan, |c 1980.</p>
+
+<p class="example">260    |a Berlin ; |a New York : |b Springer-Verlag, |c [1990?].</p>
+<p class="explan">(Date supplied by library so used square brackets)</p>
+
+<p class="example">260    |a London [Ont.] : |b University of Western Ontario, |c 1990.</p>
+
+<p class="example">260    |a [Vancouver] : |b University of British Columbia, |c 1992.</p>
+
+<p class="example">260    |a [S.l.] : |b Xavier University Press, |c 1983.</p>
+
+<p class="example">260    |a [S.l. : |b s.n., |c 19--?]</p>
+
+<p class="example">260    |a Toronto : |b Ontario Press for the University of Toronto, |c c1990.</p>
+
+<p class="example">260    |a London : |b Macmillan, 1994 [i.e. 1993].</p>
+
+<p class="example">260    |a London : |b Hyde Park Press ; |a Chicago : |b Rand-McNally, |c 1977, c1975.</p>
+
+<p>Dates &mdash; Probable dates &mdash; 1.4F</p>
+
+<table summary="date types" border="0" width="50%" cellpadding="2">
+<tr>
+<td>Closed dates &mdash; &gt;</td><td> |c 1968-1973.</td>
+</tr>
+<tr>
+<td>Open date &mdash; &gt; </td><td> |c 1968- </td>
+</tr>
+<tr>
+<td>Copyright &mdash; &gt; </td><td> |c 1985, c1980.</td>
+</tr>
+</table>
+
+<p class="jump">[<a href="./cat/Sect02/c02a2.html#top">Top</a> &nbsp;|&nbsp; <a href="./cat/c001c02.html">Table of Contents (Descriptive Cataloguing)</a> &nbsp;|&nbsp; <a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<h2><a name="physical description">Tag 300 &mdash; Physical Description</a></h2>
+
+<p>"Take information for this area from any source."&mdash;1.5A2</p>
+
+<p>Extent of item:</p>
+
+<p class="example">2 v.</p>
+
+<p class="example">360 p.</p>
+
+<p class="example">3 v. (iv, 1068 p.)</p>
+
+<p class="example">77 leaves</p>
+
+<p class="example">xi, 123 p.</p>
+
+<p class="example">[30] p.</p>
+<p class="explan">(leaves were unnumbered but were counted)</p>
+
+<p class="example">500 p. in various pagings</p>
+
+<p class="example">251 leaves in various foliations</p>
+
+<p class="example">221, [30] p.</p>
+
+<p class="example">50, 231, [10] p.</p>
+
+<p class="example">150 p., 30 p. of plates</p>
+
+<p class="example">1 v. unpaged</p>
+<p class="explan">(You have decided not to take time to estimate the number of pages)</p>
+
+<p>Illustrations</p>
+
+<p class="example">ill.</p>
+
+<p class="example">ill. (some col.)</p>
+
+<p class="example">ill., maps</p>
+
+<p class="example">maps</p>
+
+<p class="example">maps, ports</p>
+
+<p class="jump">[<a href="./cat/Sect02/c02a2.html#top">Top</a> &nbsp;|&nbsp; <a href="./cat/c001c02.html">Table of Contents (Descriptive Cataloguing)</a> &nbsp;|&nbsp; <a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<h2><a name="series">Series</a></h2>
+
+<p>Use Tags 440 or 490/830 combination. </p>
+
+<p>For examples see <a href="http://130.15.161.74/techserv/auth/base.html">Cataloguing Unit Authorities Manual</a> and AACR2 Rule 1.6</p>
+
+<p class="jump">[<a href="./cat/Sect02/c02a2.html#top">Top</a> &nbsp;|&nbsp; <a href="./cat/c001c02.html">Table of Contents (Descriptive Cataloguing)</a> &nbsp;|&nbsp; <a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<h2><a name="notes">Notes</a></h2>
+
+<p>These are some common examples. More can be found in <cite>AACR2</cite>. One can also construct almost any note in plain English. Notes are also used to justify added entries.</p>
+
+<p class="example">500    |a At head of title: American Society of Civil Engineers.</p>
+
+<p class="example">500    |a Cover title.</p>
+
+<p class="example">500    |a Cover title: Chemistry in the 19th century.</p>
+
+<p class="example">500    |a "A Wiley interscience publication." </p>
+<p class="explan">(source not noted because on title page)</p>
+
+<p class="example">500    |a "Prepared by the Society for Automotive Engineers"--Pref.</p>
+<p class="explan">(note source when note not from title page)</p>
+
+<p class="example">500    |a Includes index.</p>
+
+<p class="example">500    |a Sponsored by the National Library of Medicine.</p>
+
+<p class="example">502    |a Thesis (M.A.)--University of Chicago, 1980.</p>
+
+<p class="example">502    |a Thesis (Ph.D.)--University of Toronto, 1990.</p>
+
+<p class="example">504    |a Includes bibliographical references.</p>
+
+<p class="example">504    |a Includes bibliographical references and indexes.</p>
+
+<p class="example">504    |a Includes bibliographical references (p. 99-105).</p>
+
+<p class="example">504    |a Includes bibliographical references (p. 125-140) and index.</p>
+
+<p class="example">590    |a Gift of James Bolton.[Gift2004]</p>
+
+<p class="jump">[<a href="./cat/Sect02/c02a2.html#top">Top</a> &nbsp;|&nbsp; <a href="./cat/c001c02.html">Table of Contents (Descriptive Cataloguing)</a> &nbsp;|&nbsp; <a href="./cat/c001con.html">Table of Contents (Top)</a>]</p>
+
+<p class="image"><img width="95%" align="bottom" src="http://library.queensu.ca/images/tricol.gif" alt="Tricolour Line"></p>
+
+<p>Section 2, Part A2<br>
+/ By Joyce M. Dodds, Nov. 30, 1993<br>
+Revised January 5, 2005 by E. Read</p>
+
+<p class="end">Page maintained by Elizabeth A. Read, readel@queensu.ca. Created: 06/02/1996 Updated: <!-- datestamp:begin -->05-Jan-2005 05:17 PM<!-- datestamp:end --></p>
+He's
+</body>
+</html>
+
