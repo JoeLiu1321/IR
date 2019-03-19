@@ -1,4 +1,0 @@
-turn
-123
-abc
-ttt
