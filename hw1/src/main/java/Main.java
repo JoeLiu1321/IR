@@ -1,15 +1,16 @@
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import java.io.FileWriter;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     private static final String indexPath=System.getProperty("user.dir")+"/index";
     private static final String filePath=System.getProperty("user.dir")+"/html.txt";
+    private static final String warc_09=System.getProperty("user.dir")+"/09.warc";
+    private static final String fileOutputPath=System.getProperty("user.dir")+"/inverted_index.txt";
     public static void main(String[]args) throws Exception{
-        FileSlicer get_html = new FileSlicer(filePath);
+        FileSlicer get_html = new FileSlicer(warc_09);
         Gettoken gettoken_deal = new Gettoken();
         Directory indexDir= FSDirectory.open(Paths.get(indexPath));
         index_helper index_deal = new index_helper(indexDir);
@@ -24,18 +25,27 @@ public class Main {
                 index_deal.addDocument(gettoken_deal.gettoken(temp));
             }
         }
-        List<QueryData> searchResult=index_deal.search("*:*");
-        for(QueryData data:searchResult)
-            System.out.println(data.toString());
+        List<QueryData> totalResult=index_deal.search("*:*");
+        Map<String, String> map=new TreeMap<>();
+        for(QueryData data:totalResult)
+            map.put(data.getToken(),data.getToken());
 
-        Map<String, Term> map=new HashMap<>() ;
-//        for(QueryData data:searchResult){
-//            String key=data.getToken();
-//            if(!map.containsKey(key))
-//                map.put(data.getToken(),new Term(QueryData));
-//        }
-
-
+        int i=0;
+        Iterator<String> iterator=map.keySet().iterator();
+        while(iterator.hasNext()){
+            i++;
+            System.out.println(i+" : "+iterator.next());
+        }
+        FileWriter write=new FileWriter(fileOutputPath);
+        iterator=map.keySet().iterator();
+        while(iterator.hasNext()){
+            String token=iterator.next();
+            List<QueryData> queryResult=index_deal.search(token);
+            TokenFrequencyAnalyzer analyzer=new TokenFrequencyAnalyzer(token,queryResult);
+            System.out.println(analyzer.toString());
+            write.write(analyzer.toString()+"\n");
+        }
+        write.close();
     }
 
 
