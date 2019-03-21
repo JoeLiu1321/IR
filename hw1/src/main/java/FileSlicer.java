@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class FileSlicer {
@@ -13,6 +14,7 @@ public class FileSlicer {
         String lineText;
         while((lineText=br.readLine())!=null)
             result.add(lineText);
+        br.close();
         return result;
     }
     public String getBlockOfHtml(List<String> list,int start,int end){
@@ -20,6 +22,13 @@ public class FileSlicer {
         for(int i=start;i<end;i++){
             temp+=(list.get(i));
         }
+        return temp;
+    }
+    public String getBlockOfHtml(List<String> subList){
+        String temp="";
+        Iterator<String>iterator=subList.iterator();
+        while (iterator.hasNext())
+            temp+=iterator.next();
         return temp;
     }
 
