@@ -1,5 +1,6 @@
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.jsoup.Jsoup;
 import java.io.FileWriter;
 import java.nio.file.Paths;
 import java.util.*;
@@ -9,17 +10,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.ReentrantLock;
 
+//
+//  use the MainTest.java to run the code
+//
 public class Main{
-    private static final String indexPath=System.getProperty("user.dir")+"/index";
-    private static final String filePath=System.getProperty("user.dir")+"/html.txt";
-    private static final String warc_09=System.getProperty("user.dir")+"/09.warc";
-    private static final String fileOutputPath=System.getProperty("user.dir")+"/inverted_index.txt";
+    private static final String indexPath=System.getProperty("user.dir")+"/index"; //The index file
+    private static final String filePath=System.getProperty("user.dir")+"/html.txt"; //1 million column test data
+    private static final String warc_09=System.getProperty("user.dir")+"/09.warc"; //The input file
+    private static final String fileOutputPath=System.getProperty("user.dir")+"/output.txt"; //the output file
     public static void main(String[]args) throws Exception{
-        singlethreadMain();
-//        multithreadMain();
+//        singlethreadMain(filePath); //use the single thread
+        multithreadMain(filePath);  //use multi thread
     }
-    public static void singlethreadMain()throws Exception{
-        FileSlicer get_html = new FileSlicer(filePath);
+    public static void singlethreadMain(String inputFile)throws Exception{
+        FileSlicer get_html = new FileSlicer(inputFile);
         Gettoken gettoken_deal = new Gettoken();
         Directory indexDir= FSDirectory.open(Paths.get(indexPath));
         index_helper index_deal = new index_helper(indexDir);
@@ -60,8 +64,8 @@ public class Main{
         write.close();
     }
 
-    public static void multithreadMain() throws Exception{
-        FileSlicer slicer = new FileSlicer(filePath);
+    public static void multithreadMain(String inputFile) throws Exception{
+        FileSlicer slicer = new FileSlicer(inputFile);
         Gettoken tokeHelper = new Gettoken();
         Directory indexDir= FSDirectory.open(Paths.get(indexPath));
         index_helper helper = new index_helper(indexDir);
