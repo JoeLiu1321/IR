@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class index_helper {
+public class IndexHelper {
     private Directory index_dir;
     private int docId;
-    public index_helper(Directory dir){
+    public IndexHelper(Directory dir){
         index_dir = dir;
         docId=1;
     }
@@ -44,7 +44,8 @@ public class index_helper {
         Query query = queryParser.parse(token);
         TotalHitCountCollector collector=new TotalHitCountCollector();
         indexSearcher.search(query,collector);
-        TopDocs topDocs = indexSearcher.search(query,collector.getTotalHits());
+        int upper=(collector.getTotalHits()==0 ? 1 : collector.getTotalHits());
+        TopDocs topDocs = indexSearcher.search(query,upper);
         ScoreDoc[] scoreDocs = topDocs.scoreDocs;
         for (ScoreDoc doc : scoreDocs) {
             Document document = indexSearcher.doc(doc.doc);
@@ -62,7 +63,8 @@ public class index_helper {
         Query query = queryParser.parse(value);
         TotalHitCountCollector collector=new TotalHitCountCollector();
         indexSearcher.search(query,collector);
-        TopDocs topDocs = indexSearcher.search(query,collector.getTotalHits());
+        int upper=(collector.getTotalHits()==0 ? 1 : collector.getTotalHits());
+        TopDocs topDocs = indexSearcher.search(query,upper);
         ScoreDoc[] scoreDocs = topDocs.scoreDocs;
         for (ScoreDoc doc : scoreDocs) {
             Document document = indexSearcher.doc(doc.doc);
@@ -72,26 +74,23 @@ public class index_helper {
         return searchResult;
     }
 
-//    public  List<String> searchByMultipleField(Map<String,String>multipleCondition) throws Exception {
-//        List<String> searchResult=new ArrayList<>();
-//        IndexReader indexReader = DirectoryReader.open(index_dir);
-//        IndexSearcher indexSearcher = new IndexSearcher(indexReader);
-//        QueryParser queryParser = new QueryParser("", new StandardAnalyzer());
-//        String condition="";
-//        for(Map.Entry<>)
-//        Query getTotalResultByField = queryParser.parse(token);
-//        TotalHitCountCollector collector=new TotalHitCountCollector();
-//        indexSearcher.search(getTotalResultByField,collector);
-//        TopDocs topDocs = indexSearcher.search(getTotalResultByField,collector.getTotalHits());
-//        ScoreDoc[] scoreDocs = topDocs.scoreDocs;
-//        for (ScoreDoc doc : scoreDocs) {
-//            Document document = indexSearcher.doc(doc.doc);
-//            searchResult.add(document.get("token"));
-//        }
-//        indexReader.close();
-//        return searchResult;
-//    }
-
-
+    public List<QueryData> search(String condition)throws Exception{
+        List<QueryData> searchResult=new ArrayList<>();
+        IndexReader indexReader = DirectoryReader.open(index_dir);
+        IndexSearcher indexSearcher = new IndexSearcher(indexReader);
+        QueryParser queryParser = new QueryParser("<default field>", new StandardAnalyzer());
+        Query query = queryParser.parse(condition);
+        TotalHitCountCollector collector=new TotalHitCountCollector();
+        indexSearcher.search(query,collector);
+        int upper=(collector.getTotalHits()==0 ? 1 : collector.getTotalHits());
+        TopDocs topDocs = indexSearcher.search(query,upper);
+        ScoreDoc[] scoreDocs = topDocs.scoreDocs;
+        for (ScoreDoc doc : scoreDocs) {
+            Document document = indexSearcher.doc(doc.doc);
+            searchResult.add(new QueryData(document));
+        }
+        indexReader.close();
+        return searchResult;
+    }
 
 }

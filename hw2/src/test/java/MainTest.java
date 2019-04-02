@@ -2,6 +2,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -15,45 +16,49 @@ public class MainTest {
     }
 
     @Test
-    public void queryAllDocTf() throws Exception{
+    public void testRank() throws Exception{
+        System.out.println("Input your Query : ");
+        Scanner s=new Scanner(System.in);
+        String query=s.nextLine();
         Directory indexDir= FSDirectory.open(Paths.get(indexPath));
-        index_helper helper = new index_helper(indexDir);
-        TfIdf tfIdf=new TfIdf();
-        Iterator<Map.Entry<String,String>> totalToken =Main.getTotalResultByField("docId");
-        Iterator<Map.Entry<String,String>> totalDoc =Main.getTotalResultByField("docId");
-
-        Iterator<Map.Entry<String,String>> docIterator=totalDoc;
-        while(docIterator.hasNext()){
-            String docId=docIterator.next().getKey();
-            List<String> totalTerms=helper.searchTerms("docId",docId);
-            double tf=tfIdf.tfCalculator(totalTerms.toArray(new String[totalTerms.size()]),"About");
-            System.out.println("tf_"+docId+" = "+tf);
+        RankCalculator rankCalculator=new RankCalculator(indexDir);
+        Iterator<Score> iterator=rankCalculator.calculateRank(query);
+        System.out.println("Query:"+"\""+query+"\"");
+        System.out.println("Result:<doc#><similarity score>");
+        while (iterator.hasNext()){
+            Score score=iterator.next();
+            System.out.println(score.getDocId()+"  "+score.getScore());
         }
-
-
-        List<String[]> allTerms=new ArrayList<>();
-
-        totalDoc =Main.getTotalResultByField("docId"); //改了重新new iterator
-        docIterator=totalDoc;
-        while (docIterator.hasNext()){
-            String docId=docIterator.next().getKey();
-            List<String> docAllTerms=helper.searchTerms("docId",docId);
-            allTerms.add(docAllTerms.toArray(new String[docAllTerms.size()]));
-        }
-
-        double idf=tfIdf.idfCalculator(allTerms,"About");
-        System.out.println("idf = "+idf);
-
+        s.close();
     }
 
     @Test
-    public void multithreadMainTest() throws Exception{
-        Main.multithreadMain();
+    public void testSort() throws Exception{
+        String query="About",docId="3";
+        Directory indexDir= FSDirectory.open(Paths.get(indexPath));
+        IndexHelper helper=new IndexHelper(indexDir);
+        List<QueryData> result =helper.search("token:the");
+        for(QueryData data:result)
+            System.out.println(data.toString());
     }
 
     @Test
-    public void singlethreadMainTest()throws Exception{
-        Main.singlethreadMain();
+    public void test()throws Exception{
+        String query="About",docId="3";
+
+        Directory indexDir= FSDirectory.open(Paths.get(indexPath));
+        RankCalculator rankCalculator=new RankCalculator(indexDir);
+        rankCalculator.getDocumentWeight(query,docId,rankCalculator.totalDoc.size());
+//        Iterator<Map.Entry<String,Double>> docVec= rankCalculator.generateDocVector(docId);
+//        Map<String,Double> queryVec=rankCalculator.generateQueryVector(query);
+//        Iterator<Map.Entry<String,Double>> queryIterator=queryVec.entrySet().iterator();
+//        while(docVec.hasNext()){
+//            Map.Entry<String,Double> doc=docVec.next();
+//            Map.Entry<String,Double> que=queryIterator.next();
+//            System.out.println(doc.getKey()+ " d = "+doc.getValue().doubleValue()+ "  q = "+que.getValue().doubleValue());
+//        }
+
+
     }
 
 //    @After
