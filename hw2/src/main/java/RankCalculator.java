@@ -16,6 +16,7 @@ public class RankCalculator {
 
     public Iterator<Score> calculateRank(String query)throws Exception{
         List<Score>rankList=new ArrayList<>();
+        System.out.println("-----------calculateRank----------");
         CosineSimilarity similarity=new CosineSimilarity();
         Map<String,Double>queryVector=this.generateQueryVector(query);
         Iterator<String> iterator=totalDoc.keySet().iterator();

@@ -21,7 +21,7 @@ public class Main{
         Scanner s=new Scanner(System.in);
         String query=s.next();
         s.close();
-        System.out.println("input="+query);
+        System.out.println("Your input:"+query+" Query will take few minutes" );
         Directory indexDir= FSDirectory.open(Paths.get(indexPath));
         RankCalculator rankCalculator=new RankCalculator(indexDir);
         Iterator<Score> iterator=rankCalculator.calculateRank(query);

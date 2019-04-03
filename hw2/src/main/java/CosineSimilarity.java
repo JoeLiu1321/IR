@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -22,8 +23,14 @@ public class CosineSimilarity
       while (docVector1.hasNext()){
           double value1=docVector1.next().getValue().doubleValue();
           double value2=docVector2.next().getValue().doubleValue();
+
           value1=(Double.isInfinite(value1) ? 0.0 : value1);
           value2=(Double.isInfinite(value2) ? 0.0 : value2);
+          BigDecimal big = new BigDecimal( value1 );
+          value1 = big .setScale(3,BigDecimal.ROUND_UP).doubleValue();
+          big = new BigDecimal( value2 );
+          value2 = big .setScale(3,BigDecimal.ROUND_UP).doubleValue();;
+          // 以上取小數後三位
           dotProduct += value1 * value2;  //a.b
           magnitude1 += Math.pow(value1, 2);  //(a^2)
           magnitude2 += Math.pow(value2, 2); //(b^2)
@@ -34,10 +41,13 @@ public class CosineSimilarity
 
       if (magnitude1 != 0.0 | magnitude2 != 0.0) {
           cosineSimilarity = dotProduct / (magnitude1 * magnitude2);
+          BigDecimal big = new BigDecimal( cosineSimilarity );
+          cosineSimilarity = big .setScale(5,BigDecimal.ROUND_UP).doubleValue();
       } 
       else {
           cosineSimilarity=0.0;
       }
+
       return cosineSimilarity;
   }
 }
