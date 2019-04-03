@@ -23,7 +23,7 @@ public class Main{
         s.close();
         System.out.println("input="+query);
         Directory indexDir= FSDirectory.open(Paths.get(indexPath));
-        RankCalculator rankCalculator=new RankCalculator(indexDir);
+        RankCalculator rankCalculator=new RankCalculator(indexDir,Runtime.getRuntime().availableProcessors()*10);
         Iterator<Score> iterator=rankCalculator.calculateRank(query);
         FileWriter fw=new FileWriter(new File(fileOutputPath));
         fw.write("Query:"+"\""+query+"\""+"\n");
@@ -60,7 +60,7 @@ public class Main{
 
         Iterator<Map.Entry<String,String>>iterator=map.entrySet().iterator();
         List<Callable<Boolean>>taskList=new ArrayList<Callable<Boolean>>();
-        ExecutorService executorService= Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        ExecutorService executorService= Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*10);
         ReentrantLock lock=new ReentrantLock();
 
         System.out.println("Start Dispatch To Thread .....Available Thread : "+Runtime.getRuntime().availableProcessors());
