@@ -16,15 +16,69 @@ public class Main{
     private static final String filePath=System.getProperty("user.dir")+"/html.txt";
     private static final String warc_09=System.getProperty("user.dir")+"/09.warc";
     private static final String fileOutputPath=System.getProperty("user.dir")+"/hw2_output.txt";
-    public static void main(String[]args) throws Exception{
-        System.out.println("Input your Query : ");
-        Scanner s=new Scanner(System.in);
-        String query=s.next();
-        s.close();
-        System.out.println("input="+query);
+    public static void main(String[]args)throws Exception {
+        IndexHelper helper=new IndexHelper(FSDirectory.open(Paths.get(indexPath)));
+        Scanner scanner=new Scanner(System.in);
+        while(true) {
+                System.out.println("\nInput Your Query(exit to quit) : ");
+                String query = scanner.nextLine();
+                if(query.equals("exit"))
+                    break;
+                System.out.println("Your query = " + query );
+                query=processUserQuery(query);
+                int times= helper.search(query).size();
+                if(times>0){
+                    System.out.println("There are '"+times+"' correspond result for '"+query+"'");
+                    rankUserQuery(query);
+
+                }
+                else
+                    System.out.println("There are no correspond result.......\nPlease Input another query again!!!");
+        }
+    }
+
+    public static String processUserQuery(String query){
+        if(containsBooleanOperation(query))
+            return processBooleanQuery(query);
+        else
+            return processFreeText(query);
+    }
+
+    public static String processFreeText(String query){
+        String[] tokens =query.split("[ ]+");
+        StringBuilder afterProcess= new StringBuilder();
+        for(int i = 0; i<tokens.length; i++){
+            String token=tokens[i];
+            afterProcess.append("token:").append(token);
+            if(i!=tokens.length-1)
+                afterProcess.append(" OR ");
+        }
+        return afterProcess.toString();
+    }
+
+    public static String processBooleanQuery(String query){
+        String[] tokens =query.split("[ ]+");
+        StringBuilder afterProcess= new StringBuilder();
+        for(int i = 0; i<tokens.length; i++){
+            String token=tokens[i];
+            if(containsBooleanOperation(token) && i!=0 && i!=tokens.length-1) {
+                afterProcess.append(" ").append(token).append(" ");
+            }
+            else if(!containsBooleanOperation(token)){
+                afterProcess.append("token:").append(token);
+            }
+        }
+        return afterProcess.toString();
+    }
+
+    public static Boolean containsBooleanOperation(String query){
+        return query.contains("AND") || query.contains("OR");
+    }
+
+    public static void rankUserQuery(String query) throws Exception{
         Directory indexDir= FSDirectory.open(Paths.get(indexPath));
-        RankCalculator rankCalculator=new RankCalculator(indexDir,Runtime.getRuntime().availableProcessors()*10);
-        Iterator<Score> iterator=rankCalculator.calculateRank(query);
+        QueryCalculator queryCalculator =new QueryCalculator(indexDir,Runtime.getRuntime().availableProcessors()*10,query);
+        Iterator<Score> iterator= queryCalculator.calculateRank();
         FileWriter fw=new FileWriter(new File(fileOutputPath));
         fw.write("Query:"+"\""+query+"\""+"\n");
         fw.write("Result:<doc#><similarity score>\n");
@@ -35,7 +89,7 @@ public class Main{
             fw.write(score.getDocId()+"  "+score.getScore()+"\n");
             System.out.println(score.getDocId()+"  "+score.getScore());
         }
-        s.close();
+        fw.close();
     }
 
     public static void buildIndex() throws Exception{
@@ -59,7 +113,7 @@ public class Main{
         System.out.println("Success Read All SubHtml Position!!!!!!");
 
         Iterator<Map.Entry<String,String>>iterator=map.entrySet().iterator();
-        List<Callable<Boolean>>taskList=new ArrayList<Callable<Boolean>>();
+        List<Callable<Boolean>>taskList=new ArrayList<>();
         ExecutorService executorService= Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*10);
         ReentrantLock lock=new ReentrantLock();
 
@@ -67,7 +121,7 @@ public class Main{
 
         while(iterator.hasNext()){
             Map.Entry<String,String>entry=iterator.next();
-            taskList.add((Callable) () -> {
+            taskList.add(() -> {
                 try{
                     List<String>subData=tmp.subList(Integer.parseInt(entry.getKey()),Integer.parseInt(entry.getValue()));
                     List<String>subDocument=tokeHelper.gettoken(slicer.getBlockOfHtml(subData));
@@ -78,9 +132,7 @@ public class Main{
                 catch (Exception e){
                     e.printStackTrace();
                 }
-                finally {
-                    return true;
-                }
+                return true;
             });
         }
         System.out.println("Success Dispath All SubHtml To Thread !!!!!");

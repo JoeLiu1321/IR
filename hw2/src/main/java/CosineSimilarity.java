@@ -3,16 +3,12 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class CosineSimilarity {
-     DecimalFormat df;
+     private DecimalFormat df;
     // Method to calculate cosine similarity between two documents.
     // docVector1 : document vector 1 (a)
     // docVector2 : document vector 2 (b)
-      public CosineSimilarity(){
+    public CosineSimilarity(){
           this.df=new DecimalFormat("#.##");
-      }
-
-      public CosineSimilarity(DecimalFormat df){
-            this.df=df;
       }
 
       private double reduceCompute(double value){
@@ -23,14 +19,13 @@ public class CosineSimilarity {
           }
       }
 
-      public double cosineSimilarity(Iterator<Map.Entry<String,Double>> docVector1 , Iterator<Map.Entry<String,Double>> docVector2){
+      public double cosineSimilarity(Iterator<Map.Entry<String, Double>> docVector1, Iterator<Map.Entry<String, Double>> docVector2){
             double dotProduct = 0.0;
             double magnitude1 = 0.0;
             double magnitude2 = 0.0;
-            DecimalFormat df = new DecimalFormat("##.00");
             while (docVector1.hasNext()){
-                  double value1=docVector1.next().getValue().doubleValue();
-                  double value2=docVector2.next().getValue().doubleValue();
+                  double value1=docVector1.next().getValue();
+                  double value2=docVector2.next().getValue();
                   value1=this.reduceCompute(value1);
                   value2=this.reduceCompute(value2);
                   dotProduct += value1 * value2;  //a.b

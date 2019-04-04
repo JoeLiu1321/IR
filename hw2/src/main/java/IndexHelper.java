@@ -55,12 +55,12 @@ public class IndexHelper {
         return searchResult;
     }
 
-    public  List<String> searchTerms(String key,String value) throws Exception {
+    public  List<String> searchTerms(String conditions) throws Exception {
         List<String> searchResult=new ArrayList<>();
         IndexReader indexReader = DirectoryReader.open(index_dir);
         IndexSearcher indexSearcher = new IndexSearcher(indexReader);
-        QueryParser queryParser = new QueryParser(key, new StandardAnalyzer());
-        Query query = queryParser.parse(value);
+        QueryParser queryParser = new QueryParser("<default field>", new StandardAnalyzer());
+        Query query = queryParser.parse(conditions);
         TotalHitCountCollector collector=new TotalHitCountCollector();
         indexSearcher.search(query,collector);
         int upper=(collector.getTotalHits()==0 ? 1 : collector.getTotalHits());
