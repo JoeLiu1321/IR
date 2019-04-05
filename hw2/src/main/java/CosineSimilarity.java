@@ -1,53 +1,42 @@
-import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.Map;
 
-/*******************************************************************************
- * ************************     ADNAN OQUAISH     ******************************
- * *************************     BITS Pilani     *******************************
- *******************************************************************************/
-
-public class CosineSimilarity 
-{
-
-  // Method to calculate cosine similarity between two documents.
-  // docVector1 : document vector 1 (a)
-  // docVector2 : document vector 2 (b)
-	
-  public double cosineSimilarity(Iterator<Map.Entry<String,Double>> docVector1 , Iterator<Map.Entry<String,Double>> docVector2){
-      double dotProduct = 0.0;
-      double magnitude1 = 0.0;
-      double magnitude2 = 0.0;
-      double cosineSimilarity = 0.0;
-
-      while (docVector1.hasNext()){
-          double value1=docVector1.next().getValue().doubleValue();
-          double value2=docVector2.next().getValue().doubleValue();
-
-          value1=(Double.isInfinite(value1) ? 0.0 : value1);
-          value2=(Double.isInfinite(value2) ? 0.0 : value2);
-          BigDecimal big = new BigDecimal( value1 );
-          value1 = big .setScale(3,BigDecimal.ROUND_UP).doubleValue();
-          big = new BigDecimal( value2 );
-          value2 = big .setScale(3,BigDecimal.ROUND_UP).doubleValue();;
-          // 以上取小數後三位
-          dotProduct += value1 * value2;  //a.b
-          magnitude1 += Math.pow(value1, 2);  //(a^2)
-          magnitude2 += Math.pow(value2, 2); //(b^2)
+public class CosineSimilarity {
+     private DecimalFormat df;
+    // Method to calculate cosine similarity between two documents.
+    // docVector1 : document vector 1 (a)
+    // docVector2 : document vector 2 (b)
+    public CosineSimilarity(){
+          this.df=new DecimalFormat("#.##");
       }
 
-      magnitude1 = Math.sqrt(magnitude1);//sqrt(a^2)
-      magnitude2 = Math.sqrt(magnitude2);//sqrt(b^2)
-
-      if (magnitude1 != 0.0 | magnitude2 != 0.0) {
-          cosineSimilarity = dotProduct / (magnitude1 * magnitude2);
-          BigDecimal big = new BigDecimal( cosineSimilarity );
-          cosineSimilarity = big .setScale(5,BigDecimal.ROUND_UP).doubleValue();
-      } 
-      else {
-          cosineSimilarity=0.0;
+      private double reduceCompute(double value){
+          if(Double.isInfinite(value) | Double.isNaN(value))
+              return 0.0;
+          else{
+              return Double.parseDouble(df.format(value));
+          }
       }
 
-      return cosineSimilarity;
-  }
+      public double cosineSimilarity(Iterator<Map.Entry<String, Double>> docVector1, Iterator<Map.Entry<String, Double>> docVector2){
+            double dotProduct = 0.0;
+            double magnitude1 = 0.0;
+            double magnitude2 = 0.0;
+            while (docVector1.hasNext()){
+                  double value1=docVector1.next().getValue();
+                  double value2=docVector2.next().getValue();
+                  value1=this.reduceCompute(value1);
+                  value2=this.reduceCompute(value2);
+                  dotProduct += value1 * value2;  //a.b
+                  magnitude1 += Math.pow(value1, 2);  //(a^2)
+                  magnitude2 += Math.pow(value2, 2); //(b^2)
+            }
+            magnitude1 = Math.sqrt(magnitude1);//sqrt(a^2)
+            magnitude2 = Math.sqrt(magnitude2);//sqrt(b^2)
+
+            double cosineSimilarity = dotProduct / (magnitude1 * magnitude2);
+            return this.reduceCompute(cosineSimilarity);
+      }
+
 }

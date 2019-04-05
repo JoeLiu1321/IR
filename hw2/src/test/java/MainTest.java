@@ -4,71 +4,64 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.math.BigDecimal;
 import java.nio.file.Paths;
-import java.text.DecimalFormat;
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class MainTest {
     private static final String indexPath=System.getProperty("user.dir")+"/index";
     private static final String fileOutputPath=System.getProperty("user.dir")+"/inverted_index.txt";
-    @Test
-    public void buildIndex() throws Exception{
-        Main.buildIndex();
-    }
 
     @Test
-    public void testRank() throws Exception{
-        String query="the";
-        Directory indexDir= FSDirectory.open(Paths.get(indexPath));
-        RankCalculator rankCalculator=new RankCalculator(indexDir,Runtime.getRuntime().availableProcessors()*10);
-        Iterator<Score> iterator=rankCalculator.calculateRank(query);
-        System.out.println("Query:"+"\""+query+"\"");
-        System.out.println("Result:<doc#><similarity score>");
-        while (iterator.hasNext()){
-            Score score=iterator.next();
-            System.out.println(score.getDocId()+"  "+score.getScore());
-        }
-
+    public void test()throws Exception{
+//       IndexHelper helper=new IndexHelper(FSDirectory.open(Paths.get(indexPath)));
+//       for(int i=0;i<100;i++)
+//           System.out.println(helper.searchTerms("token:the AND docId:"+i).size());
+        QueryCalculator queryCalculator=new QueryCalculator(FSDirectory.open(Paths.get(indexPath)),500,"token:the");
+//        Iterator<Map.Entry<String,Double>> iterator=queryCalculator.generateQueryVector().entrySet().iterator();
+//        Iterator<Map.Entry<String,Double>> iterator=queryCalculator.generateDocVector("99");
+       Iterator<Map.Entry<String,Integer>>iterator= queryCalculator.generateAllTokenDocumentFreq(queryCalculator.getTotalResultByField("token",String::compareTo).keySet().iterator()).entrySet().iterator();
+        while (iterator.hasNext())
+            System.out.println(iterator.next());
     }
 
     @Test
     public void test_thread() throws Exception{
-        long startTime = System.currentTimeMillis();
-        List<Callable<Boolean>>taskList= new ArrayList<>();
-        ExecutorService executorService= Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*100);
-        ReentrantLock lock=new ReentrantLock();
-        String query="the";
+//        for (int i = 1 ; i<=1000 ; i++ ) {
+//            double start,end;
+//            start = System.currentTimeMillis();
+//            Directory indexDir= FSDirectory.open(Paths.get(indexPath));
+//            String query="the";
+//            QueryCalculator queryCalculator =new QueryCalculator(indexDir,Runtime.getRuntime().availableProcessors()*i,query);
+//            queryCalculator.generateQueryVector();
+//            end = System.currentTimeMillis();
+//            System.out.println( "用: "+ 8 * i+ "個Thread"+ "花了：" + (end-start)/(double)1000 + "秒");
+//        }
+        double start,end;
+        start = System.currentTimeMillis();
         Directory indexDir= FSDirectory.open(Paths.get(indexPath));
-        IndexHelper gp = new IndexHelper(indexDir);
-        List<QueryData> searchResult=new ArrayList<>();
-        searchResult = gp.search("token","the");
-        for( QueryData temp:searchResult){
-            taskList.add(() -> {
-                lock.lock();
-                System.out.println("thread"+ temp.getDocumentId() +  "執行中");
-                lock.unlock();
-                return true;
-            });
-        }
-        List<Future<Boolean>>futures=executorService.invokeAll(taskList);
-        System.out.println("Using Time:" + (System.currentTimeMillis() - startTime) + " ms");
-
-
+        String query="the";
+        QueryCalculator queryCalculator =new QueryCalculator(indexDir,Runtime.getRuntime().availableProcessors()*10,query);
+        queryCalculator.generateQueryVector();
+        end = System.currentTimeMillis();
+        System.out.println( "用: "+ 8*50 + "個Thread"+ "花了：" + (end-start)/(double)1000 + "秒");
     }
-//    @After
-//    public void tearDown(){
-//        File f=new File(indexPath);
-//        for(String s:f.list())
-//            new File(indexPath,s).delete();
-//        f.delete();
-//        File file=new File(fileOutputPath);
-//        file.delete();
-//    }
+//
+    @Test
+    public void testSingleThreadRank() throws Exception{
+        Directory indexDir= FSDirectory.open(Paths.get(indexPath));
+        String query="the";
+        QueryCalculator queryCalculator =new QueryCalculator(indexDir,Runtime.getRuntime().availableProcessors()*10,query);
+        Iterator<Score> iterator= queryCalculator.calculateRank();
+        FileWriter fw=new FileWriter(new File(fileOutputPath));
+        fw.write("Query:"+"\""+query+"\""+"\n");
+        fw.write("Result:<doc#><similarity score>\n");
+        System.out.println("Query:"+"\""+query+"\"");
+        System.out.println("Result:<doc#><similarity score>");
+        while (iterator.hasNext()){
+            Score score=iterator.next();
+            fw.write(score.getDocId()+"  "+score.getScore()+"\n");
+            System.out.println(score.getDocId()+"  "+score.getScore());
+        }
+    }
 
 }
