@@ -1,17 +1,25 @@
-/*******************************************************************************
- * ************************     ADNAN OQUAISH     ******************************
- * *************************     BITS Pilani     *******************************
- *******************************************************************************/
-import java.util.List;
+import java.text.DecimalFormat;
 
 public class Calculator {
-
+    private DecimalFormat df;
+    public Calculator(){
+        this.df=new DecimalFormat("#.##");
+    }
     public double calculateWeight(double tf, double idf){
-        return (1+Math.log(tf)) * idf;
+
+//        return (1+Math.log(tf)) * idf;
+        return reduceCompute(tf * idf);
     }
 
+    private double reduceCompute(double value){
+        if(Double.isInfinite(value) | Double.isNaN(value))
+            return 0.0;
+        else{
+            return Double.parseDouble(df.format(value));
+        }
+    }
     public double tfCalculator(double termFreq, double totalTerms) {
-        return termFreq / totalTerms;
+        return reduceCompute(termFreq / totalTerms);
     }
 
     // Calculates idf of term termToCheck
@@ -20,6 +28,6 @@ public class Calculator {
     // returns idf(inverse document frequency) score
     
     public double idfCalculator(double allDocuments, int documentTimes) {
-        return Math.log(allDocuments / documentTimes);
+        return reduceCompute(Math.log(allDocuments / documentTimes));
     }
 }

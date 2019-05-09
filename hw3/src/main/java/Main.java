@@ -1,8 +1,6 @@
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -13,92 +11,20 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Main{
     private static final String indexPath=System.getProperty("user.dir")+"/index";
-    private static final String filePath=System.getProperty("user.dir")+"/html.txt";
     private static final String tarPath=System.getProperty("user.dir")+"/reuters21578.tar";
-    private static final String warc_09=System.getProperty("user.dir")+"/09.warc";
-    private static final String fileOutputPath=System.getProperty("user.dir")+"/hw2_output.txt";
+    private static final String testFile=System.getProperty("user.dir")+"/hw3longtopic.txt";
+    private static final String demoPath=testFile;
     public static void main(String[]args)throws Exception {
         buildIndex();
         IndexHelper helper=new IndexHelper(FSDirectory.open(Paths.get(indexPath)));
-        List<ParagraphInfo>tmp=helper.search("newID","*:*");
-        for(ParagraphInfo p:tmp)
+        List<QueryData>tmp=helper.search("newID","*:*");
+        for(QueryData p:tmp)
             System.out.println(p.toString());
-//        Scanner scanner=new Scanner(System.in);
-//        while(true) {
-//                System.out.println("\nInput Your Query(exit to quit) : ");
-//                String query = scanner.nextLine();
-//                if(query.equals("exit"))
-//                    break;
-//                System.out.println("Your query = " + query );
-//                query=processUserQuery(query);
-//                int times= helper.search(query).size();
-//                if(times>0){
-//                    System.out.println("There are '"+times+"' correspond result for '"+query+"'");
-//                    rankUserQuery(query);
-//                }
-//                else
-//                    System.out.println("There are no correspond result.......\nPlease Input another query again!!!");
-//        }
     }
 
-    public static String processUserQuery(String query){
-        if(containsBooleanOperation(query))
-            return processBooleanQuery(query);
-        else
-            return processFreeText(query);
-    }
-
-    public static String processFreeText(String query){
-        String[] tokens =query.split("[ ]+");
-        StringBuilder afterProcess= new StringBuilder();
-        for(int i = 0; i<tokens.length; i++){
-            String token=tokens[i];
-            afterProcess.append("token:").append(token);
-            if(i!=tokens.length-1)
-                afterProcess.append(" OR ");
-        }
-        return afterProcess.toString();
-    }
-
-    public static String processBooleanQuery(String query){
-        String[] tokens =query.split("[ ]+");
-        StringBuilder afterProcess= new StringBuilder();
-        for(int i = 0; i<tokens.length; i++){
-            String token=tokens[i];
-            if(containsBooleanOperation(token) && i!=0 && i!=tokens.length-1) {
-                afterProcess.append(" ").append(token).append(" ");
-            }
-            else if(!containsBooleanOperation(token)){
-                afterProcess.append("token:").append(token);
-            }
-        }
-        return afterProcess.toString();
-    }
-
-    public static Boolean containsBooleanOperation(String query){
-        return query.contains("AND") || query.contains("OR");
-    }
-
-    public static void rankUserQuery(String query) throws Exception{
-        Directory indexDir= FSDirectory.open(Paths.get(indexPath));
-        QueryCalculator queryCalculator =new QueryCalculator(indexDir,Runtime.getRuntime().availableProcessors()*10,query);
-        Iterator<Score> iterator= queryCalculator.calculateRank();
-        FileWriter fw=new FileWriter(new File(fileOutputPath));
-        fw.write("Query:"+"\""+query+"\""+"\n");
-        fw.write("Result:<doc#><similarity score>\n");
-        System.out.println("Query:"+"\""+query+"\"");
-        System.out.println("Result:<doc#><similarity score>");
-        while (iterator.hasNext()){
-            Score score=iterator.next();
-            fw.write(score.getDocId()+"  "+score.getScore()+"\n");
-            System.out.println(score.getDocId()+"  "+score.getScore());
-        }
-        fw.close();
-    }
 
     public static void buildIndex() throws Exception{
-        String test = System.getProperty("user.dir")+"/hw3longtopic.txt" ;
-        FileSlicer slicer = new FileSlicer(tarPath);
+        FileSlicer slicer = new FileSlicer(demoPath);
         Gettoken tokeHelper = new Gettoken();
         Directory indexDir= FSDirectory.open(Paths.get(indexPath));
         IndexHelper helper = new IndexHelper(indexDir);
@@ -115,7 +41,7 @@ public class Main{
                 map.put(String.valueOf(start),String.valueOf(i));
             }
         }
-        System.out.println("Success Read All SubHtml Position!!!!!!");
+        System.out.println("Success Read All SubFile Position!!!!!!");
 
         System.out.println("SIZE:"+map.size());
         // 錯在上方!!!!!!!!!!!!!!!!
@@ -143,7 +69,7 @@ public class Main{
                 return true;
             });
         }
-        System.out.println("Success Dispath All SubHtml To Thread !!!!!");
+        System.out.println("Success Dispath All SubFile To Thread !!!!!");
         List<Future<Boolean>>isFinish=executorService.invokeAll(taskList);
         executorService.shutdown();
         System.out.println("Success Add All Document To The Index!!!");

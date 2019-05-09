@@ -10,14 +10,11 @@ import org.apache.lucene.store.Directory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class IndexHelper {
     private Directory index_dir;
-    private int docId;
     public IndexHelper(Directory dir){
         index_dir = dir;
-        docId=1;
     }
 
     public  void addDocument(ParagraphInfo tokens) throws IOException {
@@ -36,13 +33,11 @@ public class IndexHelper {
 //        document.add(new TextField("pos", String.valueOf(i), Field.Store.YES));
 //        document.add(new TextField("docId",String.valueOf(docId),Field.Store.YES));
         indexWriter.addDocument(document);
-
-        docId++;
         indexWriter.close();
     }
 
-    public  List<ParagraphInfo> search(String key,String token) throws Exception {
-        List<ParagraphInfo> searchResult=new ArrayList<>();
+    public  List<QueryData> search(String key, String token) throws Exception {
+        List<QueryData> searchResult=new ArrayList<>();
         IndexReader indexReader = DirectoryReader.open(index_dir);
         IndexSearcher indexSearcher = new IndexSearcher(indexReader);
         QueryParser queryParser = new QueryParser(key, new StandardAnalyzer());
@@ -54,7 +49,7 @@ public class IndexHelper {
         ScoreDoc[] scoreDocs = topDocs.scoreDocs;
         for (ScoreDoc doc : scoreDocs) {
             Document document = indexSearcher.doc(doc.doc);
-            searchResult.add(new ParagraphInfo(document));
+            searchResult.add(new QueryData(document));
         }
         indexReader.close();
         return searchResult;
@@ -95,6 +90,49 @@ public class IndexHelper {
             searchResult.add(new QueryData(document));
         }
         indexReader.close();
+        return searchResult;
+    }
+
+    public List<QueryData> searchWithWildCard(String field,String value)throws IOException{
+        List<QueryData> searchResult=new ArrayList<>();
+        IndexReader indexReader = DirectoryReader.open(index_dir);
+        IndexSearcher indexSearcher = new IndexSearcher(indexReader);
+        Query query =new WildcardQuery(new Term(field,value));
+        TotalHitCountCollector collector=new TotalHitCountCollector();
+        indexSearcher.search(query,collector);
+        int upper=(collector.getTotalHits()==0 ? 1 : collector.getTotalHits());
+        TopDocs topDocs = indexSearcher.search(query,upper);
+        ScoreDoc[] scoreDocs = topDocs.scoreDocs;
+        for (ScoreDoc doc : scoreDocs) {
+            Document document = indexSearcher.doc(doc.doc);
+            searchResult.add(new QueryData(document));
+        }
+        indexReader.close();
+
+        return searchResult;
+    }
+
+    public List<QueryData> booleanQueryWithWildCard(String[] wildCardfield,String[] wildCardvalue)throws IOException{
+        List<QueryData> searchResult=new ArrayList<>();
+        IndexReader indexReader = DirectoryReader.open(index_dir);
+        IndexSearcher indexSearcher = new IndexSearcher(indexReader);
+        BooleanQuery.Builder builder=new BooleanQuery.Builder();
+        for(int i=0;i<wildCardfield.length;i++){
+            Query query =new WildcardQuery(new Term(wildCardfield[i],wildCardvalue[i]));
+            builder.add(query, BooleanClause.Occur.MUST);
+        }
+        BooleanQuery booleanQuery=builder.build();
+        TotalHitCountCollector collector=new TotalHitCountCollector();
+        indexSearcher.search(booleanQuery,collector);
+        int upper=(collector.getTotalHits()==0 ? 1 : collector.getTotalHits());
+        TopDocs topDocs = indexSearcher.search(booleanQuery,upper);
+        ScoreDoc[] scoreDocs = topDocs.scoreDocs;
+        for (ScoreDoc doc : scoreDocs) {
+            Document document = indexSearcher.doc(doc.doc);
+            searchResult.add(new QueryData(document));
+        }
+        indexReader.close();
+
         return searchResult;
     }
 

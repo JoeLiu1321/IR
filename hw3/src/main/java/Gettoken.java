@@ -1,9 +1,6 @@
 import org.jsoup.Jsoup;
-import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Gettoken {
     private final String[]luceneKeywords=new String[]{"NOT","AND","OR"};
@@ -14,22 +11,14 @@ public class Gettoken {
         ParagraphInfo info = new ParagraphInfo();
         org.jsoup.nodes.Document docFromFile = Jsoup.parse(block_html, "UTF-8");
         String CGISPLIT = docFromFile.getElementsByTag("REUTERS").attr("CGISPLIT");
-        System.out.println(CGISPLIT);
-        info.setCGISPLIT(CGISPLIT); //identify set
+        info.setCGISPLIT(CGISPLIT.toLowerCase()); //identify set
         String oldID = docFromFile.getElementsByTag("REUTERS").attr("OLDID");
-        System.out.println(oldID);
-        info.setOldID(oldID);// oldid
+        info.setOldID(oldID.toLowerCase());// oldid
         String newID = docFromFile.getElementsByTag("REUTERS").attr("NEWID");
-        System.out.println(newID);
-        info.setNewID(newID); // newid
+        info.setNewID(newID.toLowerCase()); // newid
         String TOPICS = docFromFile.getElementsByTag("TOPICS").select("D").text();
-        System.out.println(TOPICS);
-        info.setTopicalCategory(TOPICS); // identify category
+        info.setTopicalCategory(TOPICS.toLowerCase()); // identify category
         String parse = docFromFile.getElementsByTag("TEXT").text();
-//        System.out.println(parse);
-//        info.setBody(parse); //body
-
-
         String[] parse_list = parse.split(" ");
 
         String parse_result = "";
@@ -45,11 +34,9 @@ public class Gettoken {
                 numOfToken++;
             }
         }
-        info.setBody(parse_result);
-        System.out.println(parse_result);
+        info.setBody(parse_result.toLowerCase());
         info.setNumOfToken(numOfToken);
-        System.out.println(numOfToken);
-
+        System.out.println("Success Read:"+newID);
         return info;
     }
 
