@@ -24,14 +24,14 @@ public class QueryCalculator {
         this.totalDoc=getTotalResultByField("newID" , Comparator.comparingInt(Integer::parseInt));
     }
 
-    public List<Map.Entry<String,Double>> predictTopic(String docId)throws Exception {
+    public Score predictTopic(String docId)throws Exception {
         ExecutorService executorService= Executors.newFixedThreadPool(this.threadCount);
         ReentrantLock lock=new ReentrantLock();
         List<Callable<Boolean>>taskList= new ArrayList<>();
         Map<String,Double>testDocVector=generateDocVector(docId);
         CosineSimilarity cosineSimilarity=new CosineSimilarity();
         Iterator<String>topicIterator=getTotalTopic(null).keySet().iterator();
-        Map<String,Double>rank=new TreeMap<>();
+        Score maxScore=new Score("",-5.0);
         while (topicIterator.hasNext()){
             String topic=topicIterator.next();
             taskList.add(() -> {
@@ -39,7 +39,10 @@ public class QueryCalculator {
                 if(testDocVector.size()>0 && centroidIterator.hasNext()) {
                     Double result = cosineSimilarity.cosineSimilarity(testDocVector.entrySet().iterator(), centroidIterator);
                     lock.lock();
-                    rank.put(topic,result);
+                    if(maxScore.getValue()<result) {
+                        maxScore.setTopic(topic);
+                        maxScore.setValue(result);
+                    }
                     lock.unlock();
                 }
                 return true;
@@ -47,9 +50,7 @@ public class QueryCalculator {
         }
         List<Future<Boolean>>futures=executorService.invokeAll(taskList);
         executorService.shutdown();
-        List<Map.Entry<String,Double>>result=new LinkedList<>(rank.entrySet());
-        result.sort((o1,o2)->-Double.compare(o1.getValue(),o2.getValue()));
-        return result;
+        return maxScore;
     }
 
     public Map<String,Double> getVector(String filePath)throws IOException{
@@ -67,6 +68,13 @@ public class QueryCalculator {
     }
 
     public void writeAllCentroid()throws Exception{
+        File dir=new File(centroidPath);
+        if(dir.exists()) {
+            for(File f:dir.listFiles())
+                f.delete();
+            dir.delete();
+        }
+        dir.mkdir();
         Iterator<String>topicIterator=this.getTotalTopic(null).keySet().iterator();
         while (topicIterator.hasNext()) {
             String topic=topicIterator.next();
@@ -112,9 +120,17 @@ public class QueryCalculator {
 
     public void writeAllDocVector()throws Exception{
         Iterator<String>iterator=totalDoc.keySet().iterator();
+        File dir=new File(docVecPath);
+        if(dir.exists()) {
+            for(File f:dir.listFiles())
+                f.delete();
+            dir.delete();
+        }
+        dir.mkdir();
         while (iterator.hasNext()){
 
             String doc=iterator.next();
+
             FileWriter fw=new FileWriter(docVecPath+doc+".txt");
             Iterator<Map.Entry<String,Double>> docIterator=generateDocVector(doc).entrySet().iterator();
             while (docIterator.hasNext()) {
@@ -202,7 +218,7 @@ public class QueryCalculator {
     }
 
     public Map<String,String> getTotalResultByField(String field ,Comparator<String> comparator) throws Exception{
-        List<QueryData> totalResult=this.helper.search(field,"*:*");
+        List<QueryData> totalResult=this.helper.searchWithWildCard("set","training");
         Map<String, String> totalKey=new TreeMap<>(comparator);
         for(QueryData data:totalResult)
             totalKey.put(data.getDocument().get(field), data.getDocument().get(field));

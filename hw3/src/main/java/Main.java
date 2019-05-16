@@ -1,6 +1,7 @@
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
+import java.io.File;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -13,15 +14,61 @@ public class Main{
     private static final String indexPath=System.getProperty("user.dir")+"/index";
     private static final String tarPath=System.getProperty("user.dir")+"/reuters21578.tar";
     private static final String testFile=System.getProperty("user.dir")+"/hw3longtopic.txt";
+    private static final String shortFile=System.getProperty("user.dir")+"/hw3test.txt";
+    private static final String thoundsDoc=System.getProperty("user.dir")+"/reut2-000.sgm";
     private static final String demoPath=testFile;
     public static void main(String[]args)throws Exception {
-        buildIndex();
-        IndexHelper helper=new IndexHelper(FSDirectory.open(Paths.get(indexPath)));
-        List<QueryData>tmp=helper.search("newID","*:*");
-        for(QueryData p:tmp)
-            System.out.println(p.toString());
+        Scanner s=new Scanner(System.in);
+        QueryCalculator queryCalculator=null;
+        while(true){
+            System.out.println("\n1.build index\n2.testing\n3.training\n4.exit\nPlease input the option\n");
+            int option=s.nextInt();
+            switch (option){
+                case 1:
+                    File index=new File(indexPath);
+                    if(index.exists()) {
+                        for(File f:index.listFiles())
+                            f.delete();
+                        index.delete();
+                    }
+                    buildIndex();
+                    break;
+                case 2:
+                    if(queryCalculator==null)
+                        queryCalculator=new QueryCalculator(FSDirectory.open(Paths.get(indexPath)),Runtime.getRuntime().availableProcessors()*10);
+                    System.out.println("Start Test!!");
+                    test(queryCalculator);
+                    break;
+                case 3:
+                    if(queryCalculator==null)
+                        queryCalculator=new QueryCalculator(FSDirectory.open(Paths.get(indexPath)),Runtime.getRuntime().availableProcessors()*10);
+                    System.out.println("Start training!!");
+                    queryCalculator.writeAllDocVector();
+                    queryCalculator.writeAllCentroid();
+                    System.out.println("Training Successfully!!");
+                    break;
+                case 4:
+                    System.out.println("exit");
+                    return;
+                default:
+                    break;
+            }
+        }
     }
 
+    public static void test(QueryCalculator queryCalculator)throws Exception{
+        IndexHelper helper=new IndexHelper(FSDirectory.open(Paths.get(indexPath)));
+        List<QueryData> testSet=helper.booleanQueryWithWildCard(new String[]{"set"},new String[]{"*testset"});
+        int successPredict=0;
+        int totalTest=testSet.size();
+        for(QueryData queryData:testSet){
+            Score maxRank=queryCalculator.predictTopic(queryData.getNewID());
+            System.out.println("\ntest Document:"+queryData.getNewID()+"\nPredict:"+maxRank.getTopic()+"\nActual:"+queryData.getTopicalCategory()+"\n");
+            if(maxRank.getTopic().equals(queryData.getTopicalCategory()))
+                successPredict++;
+        }
+        System.out.println("Total Test :"+totalTest+"\nSuccess : "+successPredict+"\nFail : "+(totalTest-successPredict));
+    }
 
     public static void buildIndex() throws Exception{
         FileSlicer slicer = new FileSlicer(demoPath);
